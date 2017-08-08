@@ -1,7 +1,6 @@
 import React from 'react';
 import id from 'shortid';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-var Orientation = require('react-native-orientation');
 
 var data2 = {
   "metadata": {
