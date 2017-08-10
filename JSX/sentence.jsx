@@ -1,4 +1,5 @@
 import id from 'shortid';
+import HTMLView from 'react-native-htmlview';
 
 function Row({ numSlots, values, tier }) {
 	// I/P: numSlots, taken from parent sentence
@@ -65,5 +66,6 @@ export function Sentence({ sentence }) {
 		// Tier attribute will be used for hiding/showing tiers:
 		rowList.push(<Row key={id.generate()} numSlots={numSlots} values={values} tier={tier} />);
 	}
-	return <table className="gloss"><tbody>{rowList}</tbody></table>;
+	const htmlContent = <table className="gloss"><tbody>{rowList}</tbody></table>;
+	return <HTMLView value={htmlContent} />;
 }
