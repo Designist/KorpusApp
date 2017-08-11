@@ -1,7 +1,6 @@
 import React from 'react';
 import id from 'shortid';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import HTMLView from 'react-native-htmlview';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 var data2 = {
   "metadata": {
@@ -2897,89 +2896,85 @@ var data2 = {
   ]
 };
 
-function Row({ numSlots, values, tier }) {
-    // I/P: numSlots, taken from parent sentence
-    //      values, list of segments (e.g., morphemes) with start/end times
-    //      tier, the tier name
-    // O/P: single row of glossed sentence, with colspan spacing
-    // Status: tested, working
+// function Row({ numSlots, values, tier }) {
+//   // I/P: numSlots, taken from parent sentence
+//   //      values, list of segments (e.g., morphemes) with start/end times
+//   //      tier, the tier name
+//   // O/P: single row of glossed sentence, with colspan spacing
+//   // Status: tested, working
+//   const finalSlot = numSlots;
+//   let currentSlot = 0;
+//   let output = [];
 
-    // Building a row requires slots to determine the width of certain
-    // table elements. Each element will have a start and end slot, and
-    // if there is a gap between an end slot and the following start
-    // slot, then a blank table element is input. We use the attribute
-    // 'colSpan' to account for elements which require large slots.
+//   for (const v of values) {
+//     const startSlot = v['start_slot'];
+//     const endSlot = v['end_slot'];
+//     const text = v['value'];
 
-    // The currentSlot counter is used to 'fill in' the missing
-    // slots when a dependent tier doesn't line up with its corresponding
-    // independent tier. For example, if the i-tier goes from 0-12, and
-    // the dependent tier goes from 2-5 and 7-12, then the currentSlot
-    // counter would be responsible for filling those gaps between 0-2
-    // and 5-7.
-    const finalSlot = numSlots;
-    let currentSlot = 0;
-    let output = "";
+//     // Add blank space before current value:
+//     if (startSlot > currentSlot) {
+//       const diff = String(startSlot - currentSlot);
+//       output.push(<td key={id.generate()} colSpan={diff} />);
+//     }
+//     // Create element with correct 'colSpan' width:
+//     const size = String(endSlot - startSlot);
+//     output.push(<td key={id.generate()} colSpan={size}>{text}</td>);
+//     currentSlot = endSlot;
+//   }
+//   // Fill blank space at end of table row:
+//   if (currentSlot < finalSlot) {
+//     const diff = String(finalSlot - currentSlot);
+//     output.push(<td key={id.generate()} colSpan={diff} />);
+//   }
+//   return <tr data-tier={tier}>{output}</tr>;
+// }
 
-    for (const v of values) {
-        const startSlot = v['start_slot'];
-        const endSlot = v['end_slot'];
-        const text = v['value'];
+// function Sentence({ sentence }) {
+//   // I/P: sentence, a sentence
+//   // O/P: table of glossed Row components
+//   // Status: tested, working
+//   let rowList = []; // to be output
+//   const numSlots = sentence['num_slots'];
+//   // Add the indepentent tier, i.e., the top row, to the list of rows. Note that
+//   // 'colSpan={numSlots}' ensures that this row spans the entire table.
+//   rowList.push(
+//     <tr data-tier={sentence['tier']}>
+//       <td colSpan={numSlots} className="topRow">{sentence['text']}</td>
+//     </tr>
+//   );
+//   const dependents = sentence['dependents']; // list of dependent tiers, flat structure
+//   // Add each dependent tier to the row list:
+//   for (const {values, tier} of dependents) {
+//     // Tier attribute will be used for hiding/showing tiers:
+//     rowList.push(<Row key={id.generate()} numSlots={numSlots} values={values} tier={tier} />);
+//   }
+//   return <table className="gloss"><tbody>{rowList}</tbody></table>;
+// }
 
-        // Add blank space before current value:
-        if (startSlot > currentSlot) {
-            const diff = String(startSlot - currentSlot);
-            output += `<td key=${id.generate()} colSpan=${diff} />`;
-        }
-        // Create element with correct 'colSpan' width:
-        const size = String(endSlot - startSlot);
-        output += `<td key=${id.generate()} colSpan=${size}>${text}</td>`;
-        currentSlot = endSlot;
+class TextDisplay extends React.Component {
+  // I/P: data, a single story in JSON format
+  // O/P: a div containing the plaintext of this story
+  // Status: tested, not working
+  render() {
+    var output = [];
+    var data = this.props.data;
+    var title = data["metadata"]["title"];
+    var sentences = data["sentences"];
+
+    output.push(<Text key={id.generate()} style={styles.bigred}>{title}</Text>);
+
+    for (var i=0; i<sentences.length; i++) {
+      output.push(<Text key={id.generate()} style={styles.blue}>{sentences[i]["text"]}</Text>);
     }
-    // Fill blank space at end of table row:
-    if (currentSlot < finalSlot) {
-        const diff = String(finalSlot - currentSlot);
-        output += `<td key=${id.generate()} colSpan=${diff} />`;
-    }
-    return `<tr data-tier=${tier}>${output}</tr>`;
-}
-
-function Sentence({ sentence }) {
-    // I/P: sentence, a sentence
-    // O/P: table of glossed Row components
-    // Status: tested, working
-    let rows = ''; // to be output
-    const numSlots = sentence['num_slots'];
-    // Add the indepentent tier, i.e., the top row, to the list of rows. Note that
-    // 'colSpan={numSlots}' ensures that this row spans the entire table.
-    rows += `<tr data-tier=${sentence['tier']}>
-          <td colSpan=${numSlots} className="topRow">${sentence['text']}</td>
-        </tr>`;
-    const dependents = sentence['dependents']; // list of dependent tiers, flat structure
-    // Add each dependent tier to the row list:
-    for (const {values, tier} of dependents) {
-        // Tier attribute will be used for hiding/showing tiers:
-        rows += `<Row key=${id.generate()} numSlots=${numSlots} values=${values} tier=${tier} />`;
-    }
-    const htmlContent = `<table className="gloss"><tbody>${rows}</tbody></table>`;
-    return <HTMLView value={htmlContent} />;
-}
-
-function UntimedTextDisplay({ sentences }) {
-    // I/P: sentences, a list of sentences
-    // O/P: the main gloss view, with several Sentences arranged vertically, each wrapped in an UntimedBlock
-    // Status:
-    return (<FlatList
-        data={sentences}
-        renderItem={({item}) => <Sentence sentence={item} />}
-        id="untimedTextDisplay"
-    />);
+    return <ScrollView>{output}</ScrollView>;
+  }
 }
 
 export default class App extends React.Component {
   render() {
     return (
       <View>
-        <UntimedTextDisplay sentences={data2.sentences} />
+        <TextDisplay data={data2} />
       </View>
     );
   }
