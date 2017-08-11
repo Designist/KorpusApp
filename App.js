@@ -2929,27 +2929,49 @@ var data2 = {
 //   return <tr data-tier={tier}>{output}</tr>;
 // }
 
-// function Sentence({ sentence }) {
-//   // I/P: sentence, a sentence
-//   // O/P: table of glossed Row components
-//   // Status: tested, working
-//   let rowList = []; // to be output
-//   const numSlots = sentence['num_slots'];
-//   // Add the indepentent tier, i.e., the top row, to the list of rows. Note that
-//   // 'colSpan={numSlots}' ensures that this row spans the entire table.
-//   rowList.push(
-//     <tr data-tier={sentence['tier']}>
-//       <td colSpan={numSlots} className="topRow">{sentence['text']}</td>
-//     </tr>
-//   );
-//   const dependents = sentence['dependents']; // list of dependent tiers, flat structure
-//   // Add each dependent tier to the row list:
-//   for (const {values, tier} of dependents) {
-//     // Tier attribute will be used for hiding/showing tiers:
-//     rowList.push(<Row key={id.generate()} numSlots={numSlots} values={values} tier={tier} />);
-//   }
-//   return <table className="gloss"><tbody>{rowList}</tbody></table>;
-// }
+function Sentence({ sentence }) {
+  // I/P: sentence, a sentence
+  // O/P: table of glossed Row components
+  // Status: tested, working
+  const numSlots = sentence['num_slots'];
+  // Add the independent tier, i.e., the top row, to the list of rows. Note that
+  // 'colSpan={numSlots}' ensures that this row spans the entire table.
+  let topRow =
+    <tr data-tier={sentence['tier']}>
+      <td colSpan={numSlots} className="topRow">{sentence['text']}</td>
+    </tr>
+  ;
+  const dependents = sentence['dependents']; // list of dependent tiers, flat structure
+  // Add each dependent tier to the row list:
+  let timeslotsToTierValues = {};
+  let currentSlot = 0;
+  for (const {values, tier} of dependents) {
+    // Tier attribute will be used for hiding/showing tiers:
+    // rowList.push(<Row key={id.generate()} numSlots={numSlots} values={values} tier={tier} />);
+    for (const { start_slot, end_slot, value } of values) {
+      if (!timeslotsToTierValues.hasOwnProperty(start_slot)) {
+        timeslotsToTierValues[start_slot] = {}
+      }
+      timeslotsToTierValues[start_slot][tier] = value;
+    }
+  }
+
+  // sort by timeslot
+  let timeslotsToColumns = timeslotsToTierValues
+      .entries()
+      .sort((a,b) => parseInt(a.key, 10) - parseInt(b.key, 10))
+      // sort each timeslot by tier
+      .map(e =>
+          e.values
+              .entries()
+              .sort((a,b) => a.key - b.key)
+              .map(f => f.value));
+  // (assume no need for empty slots)
+
+  // sort timeslotsToTierValues by start_slot, and within that, by tier
+  // desired result: <ListThingy><Inner>T1 T2</Inner><Inner>T1 T2</Inner></ListThingy>
+  return <table className="gloss"><tbody>{rowList}</tbody></table>;
+}
 
 class TextDisplay extends React.Component {
   // I/P: data, a single story in JSON format
@@ -2964,7 +2986,8 @@ class TextDisplay extends React.Component {
     output.push(<Text key={id.generate()} style={styles.bigred}>{title}</Text>);
 
     for (var i=0; i<sentences.length; i++) {
-      output.push(<Text key={id.generate()} style={styles.blue}>{sentences[i]["text"]}</Text>);
+      // output.push(<Text key={id.generate()} style={styles.blue}>{sentences[i]["text"]}</Text>);
+      output.push(<Sentence key={id.generate()} sentence={sentences[i]} />);
     }
     return <ScrollView>{output}</ScrollView>;
   }
