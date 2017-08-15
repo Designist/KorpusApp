@@ -1,6 +1,7 @@
 import React from 'react';
 import id from 'shortid';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 var data2 = {
   "metadata": {
@@ -2896,81 +2897,31 @@ var data2 = {
   ]
 };
 
-// function Row({ numSlots, values, tier }) {
-//   // I/P: numSlots, taken from parent sentence
-//   //      values, list of segments (e.g., morphemes) with start/end times
-//   //      tier, the tier name
-//   // O/P: single row of glossed sentence, with colspan spacing
-//   // Status: tested, working
-//   const finalSlot = numSlots;
-//   let currentSlot = 0;
-//   let output = [];
-
-//   for (const v of values) {
-//     const startSlot = v['start_slot'];
-//     const endSlot = v['end_slot'];
-//     const text = v['value'];
-
-//     // Add blank space before current value:
-//     if (startSlot > currentSlot) {
-//       const diff = String(startSlot - currentSlot);
-//       output.push(<td key={id.generate()} colSpan={diff} />);
-//     }
-//     // Create element with correct 'colSpan' width:
-//     const size = String(endSlot - startSlot);
-//     output.push(<td key={id.generate()} colSpan={size}>{text}</td>);
-//     currentSlot = endSlot;
-//   }
-//   // Fill blank space at end of table row:
-//   if (currentSlot < finalSlot) {
-//     const diff = String(finalSlot - currentSlot);
-//     output.push(<td key={id.generate()} colSpan={diff} />);
-//   }
-//   return <tr data-tier={tier}>{output}</tr>;
-// }
-
-function Sentence({ sentence }) {
+export function Sentence({ sentence }) {
   // I/P: sentence, a sentence
   // O/P: table of glossed Row components
   // Status: tested, working
-  const numSlots = sentence['num_slots'];
+
   // Add the independent tier, i.e., the top row, to the list of rows. Note that
-  // 'colSpan={numSlots}' ensures that this row spans the entire table.
-  let topRow =
-    <tr data-tier={sentence['tier']}>
-      <td colSpan={numSlots} className="topRow">{sentence['text']}</td>
-    </tr>
-  ;
+  const topRow = <Row data-tier={sentence['tier']} className="topRow" data={[sentence['text']]} />;
+
   const dependents = sentence['dependents']; // list of dependent tiers, flat structure
+  let dependentRows = [];
   // Add each dependent tier to the row list:
-  let timeslotsToTierValues = {};
-  let currentSlot = 0;
-  for (const {values, tier} of dependents) {
-    // Tier attribute will be used for hiding/showing tiers:
-    // rowList.push(<Row key={id.generate()} numSlots={numSlots} values={values} tier={tier} />);
-    for (const { start_slot, end_slot, value } of values) {
-      if (!timeslotsToTierValues.hasOwnProperty(start_slot)) {
-        timeslotsToTierValues[start_slot] = {}
-      }
-      timeslotsToTierValues[start_slot][tier] = value;
+  for (const {values} of dependents) {
+    let row = [];
+    for (const v of values) {
+      row.push(v['value']);
     }
+    dependentRows.push(row);
   }
 
-  // sort by timeslot
-  let timeslotsToColumns = timeslotsToTierValues
-      .entries()
-      .sort((a,b) => parseInt(a.key, 10) - parseInt(b.key, 10))
-      // sort each timeslot by tier
-      .map(e =>
-          e.values
-              .entries()
-              .sort((a,b) => a.key - b.key)
-              .map(f => f.value));
-  // (assume no need for empty slots)
-
-  // sort timeslotsToTierValues by start_slot, and within that, by tier
-  // desired result: <ListThingy><Inner>T1 T2</Inner><Inner>T1 T2</Inner></ListThingy>
-  return <table className="gloss"><tbody>{rowList}</tbody></table>;
+  return (
+  <Table className="gloss">
+    {topRow}
+    <Rows data={dependentRows} />
+  </Table>
+  );
 }
 
 class TextDisplay extends React.Component {
@@ -3004,6 +2955,11 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  row: { height: 30 },
+  singleHead: { width: 80, height: 30, backgroundColor: '#c8e1ff' },
+  head: { flex: 1, backgroundColor: '#c8e1ff' },
+  title: { flex: 2, backgroundColor: '#f6f8fa' },
+  text: { marginRight: 6, textAlign:'right' },
   container: {
     flex: 1,
     backgroundColor: '#fff',
