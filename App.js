@@ -2897,7 +2897,7 @@ var data2 = {
   ]
 };
 
-export function Sentence({ sentence }) {
+export function SentenceTable({ sentence }) {
   // I/P: sentence, a sentence
   // O/P: table of glossed Row components
   // Status: tested, working
@@ -2917,10 +2917,41 @@ export function Sentence({ sentence }) {
   }
 
   return (
-  <Table className="gloss">
-    {topRow}
-    <Rows data={dependentRows} />
-  </Table>
+      <Table className="gloss">
+        {topRow}
+        <Rows data={dependentRows} />
+      </Table>
+  );
+}
+
+export function TimedSentence({ sentence }) {
+  // I/P: sentence, a sentence
+  // O/P: table of glossed Row components
+  // Status: tested, working
+
+  // Add the independent tier, i.e., the top row, to the list of rows. Note that
+  const topRow = <Row data-tier={sentence['tier']} className="topRow" data={[sentence['text']]} />;
+
+  const dependents = sentence['dependents']; // list of dependent tiers, flat structure
+  let dependentRows = [];
+  // Add each free-gloss tier to the row list:
+  for (const {values} of dependents) {
+    // Quick and dirty: assume it's a free gloss iff there's only one value
+    // FIXME shows all tiers on single-word sentences
+    if (values.length === 1) {
+      let row = [];
+      for (const v of values) {
+        row.push(v['value']);
+      }
+      dependentRows.push(row);
+    }
+  }
+
+  return (
+      <Table className="gloss">
+        {topRow}
+        <Rows data={dependentRows} />
+      </Table>
   );
 }
 
@@ -2938,7 +2969,12 @@ class TextDisplay extends React.Component {
 
     for (var i=0; i<sentences.length; i++) {
       // output.push(<Text key={id.generate()} style={styles.blue}>{sentences[i]["text"]}</Text>);
-      output.push(<Sentence key={id.generate()} sentence={sentences[i]} />);
+      const timed = true;
+      if (timed) {
+        output.push(<TimedSentence key={id.generate()} sentence={sentences[i]} />);
+      } else {
+        output.push(<SentenceTable key={id.generate()} sentence={sentences[i]} />);
+      }
     }
     return <ScrollView>{output}</ScrollView>;
   }
