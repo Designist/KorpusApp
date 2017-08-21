@@ -6,20 +6,53 @@ import SentenceTable from './SentenceTable';
 
 var data2 = {
   "metadata": {
+    "timed": true,
+    "title": {
+      "_default": "Intro"
+    },
+    "media": {
+      "audio": "Intro.mp3",
+      "video": "Intro.mp4"
+    },
+    "date_created": "01/17/2012",
+    "date_uploaded": "",
+    "speakers": [
+      "Martin Criollo",
+      "Hugo Lucitante"
+    ],
+    "description": "A brief introduction to the Cofán people.",
+    "genre": "Nonfiction",
+    "author": "Martin Criollo",
+    "glosser": "Scott Anderbois",
+    "languages": [],
+    "source": {
+      "_default": ""
+    },
     "tier IDs": {
-      "T1": "A'ingae",
-      "T2": "English",
-      "T3": "Morphemes",
-      "T4": "Glossed Morpheme"
+      "T1": {
+        "name": "A'ingae",
+        "subdivided": false
+      },
+      "T2": {
+        "name": "English",
+        "subdivided": false
+      },
+      "T3": {
+        "name": "Morphemes",
+        "subdivided": true
+      },
+      "T4": {
+        "name": "Glossed Morpheme",
+        "subdivided": true
+      }
     },
     "speaker IDs": {
       "S1": {
         "name": "Martin Criollo",
-        "language": "con",
         "tier": "T1"
       }
     },
-    "title": "Intro-Ingi Cansecho Ande"
+    "title from filename": "Intro"
   },
   "sentences": [
     {
@@ -441,6 +474,16 @@ var data2 = {
               "start_slot": 3,
               "end_slot": 4,
               "value": "injan=nda"
+            },
+            {
+              "start_slot": 4,
+              "end_slot": 5,
+              "value": "simba'fa=i'ccu"
+            },
+            {
+              "start_slot": 5,
+              "end_slot": 6,
+              "value": "simba-'fa"
             }
           ]
         },
@@ -466,6 +509,16 @@ var data2 = {
               "start_slot": 3,
               "end_slot": 4,
               "value": "want=COND"
+            },
+            {
+              "start_slot": 4,
+              "end_slot": 5,
+              "value": "fishing.rope=INST"
+            },
+            {
+              "start_slot": 5,
+              "end_slot": 6,
+              "value": "fish-PL.SUBJ"
             }
           ]
         }
@@ -511,6 +564,16 @@ var data2 = {
               "start_slot": 3,
               "end_slot": 4,
               "value": "a'mbian='fa"
+            },
+            {
+              "start_slot": 4,
+              "end_slot": 5,
+              "value": "ufa='cco=cco"
+            },
+            {
+              "start_slot": 5,
+              "end_slot": 6,
+              "value": "sata=ma"
             }
           ]
         },
@@ -536,6 +599,16 @@ var data2 = {
               "start_slot": 3,
               "end_slot": 4,
               "value": "have=PL.SUBJ"
+            },
+            {
+              "start_slot": 4,
+              "end_slot": 5,
+              "value": "blow=SHAPE.ANGULAR=??"
+            },
+            {
+              "start_slot": 5,
+              "end_slot": 6,
+              "value": "spear=ACC"
             }
           ]
         }
@@ -1153,6 +1226,16 @@ var data2 = {
           "tier": "T3",
           "values": [
             {
+              "start_slot": 0,
+              "end_slot": 1,
+              "value": "toya'caen"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "coca"
+            },
+            {
               "start_slot": 2,
               "end_slot": 3,
               "value": "na'e=ni"
@@ -1162,6 +1245,16 @@ var data2 = {
         {
           "tier": "T4",
           "values": [
+            {
+              "start_slot": 0,
+              "end_slot": 1,
+              "value": "also"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "Coca"
+            },
             {
               "start_slot": 2,
               "end_slot": 3,
@@ -1276,6 +1369,36 @@ var data2 = {
               "start_slot": 0,
               "end_slot": 2,
               "value": "Aguarico río"
+            }
+          ]
+        },
+        {
+          "tier": "T3",
+          "values": [
+            {
+              "start_slot": 0,
+              "end_slot": 1,
+              "value": "Aguarico"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "setsani"
+            }
+          ]
+        },
+        {
+          "tier": "T4",
+          "values": [
+            {
+              "start_slot": 0,
+              "end_slot": 1,
+              "value": "Aguarico"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "río.abajo"
             }
           ]
         }
@@ -1446,6 +1569,21 @@ var data2 = {
               "start_slot": 2,
               "end_slot": 3,
               "value": "gi"
+            },
+            {
+              "start_slot": 3,
+              "end_slot": 4,
+              "value": "canse-'fa"
+            },
+            {
+              "start_slot": 4,
+              "end_slot": 5,
+              "value": "trece"
+            },
+            {
+              "start_slot": 5,
+              "end_slot": 6,
+              "value": "canqque=ni"
             }
           ]
         },
@@ -1466,6 +1604,21 @@ var data2 = {
               "start_slot": 2,
               "end_slot": 3,
               "value": "1"
+            },
+            {
+              "start_slot": 3,
+              "end_slot": 4,
+              "value": "live-PL.SUBJ"
+            },
+            {
+              "start_slot": 4,
+              "end_slot": 5,
+              "value": "thirteen"
+            },
+            {
+              "start_slot": 5,
+              "end_slot": 6,
+              "value": "town=LOC"
             }
           ]
         }
@@ -1576,6 +1729,36 @@ var data2 = {
               "start_slot": 0,
               "end_slot": 2,
               "value": "Chandie na'e"
+            }
+          ]
+        },
+        {
+          "tier": "T3",
+          "values": [
+            {
+              "start_slot": 0,
+              "end_slot": 1,
+              "value": "Chandie"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "na'e"
+            }
+          ]
+        },
+        {
+          "tier": "T4",
+          "values": [
+            {
+              "start_slot": 0,
+              "end_slot": 1,
+              "value": "clear"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "river"
             }
           ]
         }
@@ -1808,6 +1991,36 @@ var data2 = {
               "value": "Totoa Nai'qui"
             }
           ]
+        },
+        {
+          "tier": "T3",
+          "values": [
+            {
+              "start_slot": 0,
+              "end_slot": 1,
+              "value": "Toto-a"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "Nai'-qui"
+            }
+          ]
+        },
+        {
+          "tier": "T4",
+          "values": [
+            {
+              "start_slot": 0,
+              "end_slot": 1,
+              "value": "white-ADJ"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "river-SHAPE"
+            }
+          ]
         }
       ]
     },
@@ -1866,6 +2079,36 @@ var data2 = {
               "start_slot": 0,
               "end_slot": 2,
               "value": "Pisorié canqque"
+            }
+          ]
+        },
+        {
+          "tier": "T3",
+          "values": [
+            {
+              "start_slot": 0,
+              "end_slot": 1,
+              "value": "Pisorié"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "canqque"
+            }
+          ]
+        },
+        {
+          "tier": "T4",
+          "values": [
+            {
+              "start_slot": 0,
+              "end_slot": 1,
+              "value": "Pisore"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "town"
             }
           ]
         }
@@ -2001,6 +2244,21 @@ var data2 = {
               "start_slot": 5,
               "end_slot": 6,
               "value": "San"
+            },
+            {
+              "start_slot": 6,
+              "end_slot": 7,
+              "value": "Pablo"
+            },
+            {
+              "start_slot": 7,
+              "end_slot": 8,
+              "value": "Puerto"
+            },
+            {
+              "start_slot": 8,
+              "end_slot": 9,
+              "value": "Bolivar"
             }
           ]
         },
@@ -2036,6 +2294,21 @@ var data2 = {
               "start_slot": 5,
               "end_slot": 6,
               "value": "San"
+            },
+            {
+              "start_slot": 6,
+              "end_slot": 7,
+              "value": "Pablo"
+            },
+            {
+              "start_slot": 7,
+              "end_slot": 8,
+              "value": "Puerto"
+            },
+            {
+              "start_slot": 8,
+              "end_slot": 9,
+              "value": "Bolívar"
             }
           ]
         }
@@ -2276,6 +2549,16 @@ var data2 = {
               "start_slot": 0,
               "end_slot": 1,
               "value": "Reserva"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "Faunística"
+            },
+            {
+              "start_slot": 2,
+              "end_slot": 3,
+              "value": "Cuyabeno"
             }
           ]
         },
@@ -2286,6 +2569,16 @@ var data2 = {
               "start_slot": 0,
               "end_slot": 1,
               "value": "reserve"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "wildlife"
+            },
+            {
+              "start_slot": 2,
+              "end_slot": 3,
+              "value": "Cuyabeno"
             }
           ]
         }
@@ -2713,6 +3006,16 @@ var data2 = {
           "tier": "T3",
           "values": [
             {
+              "start_slot": 0,
+              "end_slot": 1,
+              "value": "tsa=i'ccu=ngi"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "osha-'fa='ya"
+            },
+            {
               "start_slot": 2,
               "end_slot": 3,
               "value": "ingi"
@@ -2737,6 +3040,16 @@ var data2 = {
         {
           "tier": "T4",
           "values": [
+            {
+              "start_slot": 0,
+              "end_slot": 1,
+              "value": "ANA=INST=1"
+            },
+            {
+              "start_slot": 1,
+              "end_slot": 2,
+              "value": "empower-PL.SUBJ-FUT"
+            },
             {
               "start_slot": 2,
               "end_slot": 3,
@@ -2898,7 +3211,7 @@ var data2 = {
   ]
 };
 
-export function TimedSentence({ sentence }) {
+export function TimedSentence({ sentence, tiers }) {
   // I/P: sentence, a sentence
   // O/P: table of glossed Row components
   // Status: tested, working
@@ -2909,10 +3222,9 @@ export function TimedSentence({ sentence }) {
   const dependents = sentence['dependents']; // list of dependent tiers, flat structure
   let dependentRows = [];
   // Add each free-gloss tier to the row list:
-  for (const {values} of dependents) {
-    // Quick and dirty: assume it's a free gloss iff there's only one value
-    // FIXME shows all tiers on single-word sentences
-    if (values.length === 1) {
+  for (const { tier, values } of dependents) {
+    const isFreeGloss = !tiers[tier]['subdivided'];
+    if (isFreeGloss) {
       let row = [];
       for (const v of values) {
         row.push(v['value']);
@@ -2936,8 +3248,9 @@ class TextDisplay extends React.Component {
   render() {
     var output = [];
     var data = this.props.data;
-    var title = data["metadata"]["title"];
+    var title = data["metadata"]["title"]["_default"];
     var sentences = data["sentences"];
+    var tiers = data["metadata"]["tier IDs"];
 
     output.push(<Text key={id.generate()} style={styles.bigred}>{title}</Text>);
 
@@ -2945,7 +3258,7 @@ class TextDisplay extends React.Component {
       // output.push(<Text key={id.generate()} style={styles.blue}>{sentences[i]["text"]}</Text>);
       const timed = true;
       if (timed) {
-        output.push(<TimedSentence key={id.generate()} sentence={sentences[i]} />);
+        output.push(<TimedSentence key={id.generate()} sentence={sentences[i]} tiers={tiers} />);
       } else {
         output.push(<SentenceTable key={id.generate()} sentence={sentences[i]} />);
       }
