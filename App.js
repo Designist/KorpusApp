@@ -3,6 +3,7 @@ import id from 'shortid';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import SentenceTable from './SentenceTable';
+import { NativeRouter as Router, Route, Link } from 'react-router-native';
 
 var data2 = {
   "metadata": {
@@ -3267,12 +3268,29 @@ class TextDisplay extends React.Component {
   }
 }
 
+function dummyIndex() {
+  return <Link to={`/story1`}><Text>Go to story</Text></Link>;
+}
+
+function indexLink() {
+  return <Link to={`/`}><Text>Go to index</Text></Link>;
+}
+
+// a placeholder component used only for debugging
+function SayHi({ greeting }) {
+  return <Text>{greeting}</Text>;
+}
+
 export default class App extends React.Component {
   render() {
     return (
-      <View>
-        <TextDisplay data={data2} />
-      </View>
+        <Router>
+          <View>
+            <Route exact path="/" component={dummyIndex} />
+            <Route path="/story/1" component={indexLink} />
+            <Route path="/story/1" render={props => <TextDisplay data={data2} />} />
+          </View>
+        </Router>
     );
   }
 }
