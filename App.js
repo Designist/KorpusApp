@@ -2,6 +2,7 @@ import React from 'react';
 import id from 'shortid';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import SentenceTable from './SentenceTable';
 
 var data2 = {
   "metadata": {
@@ -2896,33 +2897,6 @@ var data2 = {
     }
   ]
 };
-
-export function SentenceTable({ sentence }) {
-  // I/P: sentence, a sentence
-  // O/P: table of glossed Row components
-  // Status: tested, working
-
-  // Add the independent tier, i.e., the top row, to the list of rows. Note that
-  const topRow = <Row data-tier={sentence['tier']} className="topRow" data={[sentence['text']]} />;
-
-  const dependents = sentence['dependents']; // list of dependent tiers, flat structure
-  let dependentRows = [];
-  // Add each dependent tier to the row list:
-  for (const {values} of dependents) {
-    let row = [];
-    for (const v of values) {
-      row.push(v['value']);
-    }
-    dependentRows.push(row);
-  }
-
-  return (
-      <Table className="gloss">
-        {topRow}
-        <Rows data={dependentRows} />
-      </Table>
-  );
-}
 
 export function TimedSentence({ sentence }) {
   // I/P: sentence, a sentence
