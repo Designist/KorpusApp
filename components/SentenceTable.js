@@ -1,3 +1,6 @@
+import React from 'react';
+import { Table, Row, Rows } from 'react-native-table-component';
+
 export default function SentenceTable({ sentence }) {
   // I/P: sentence, a sentence
   // O/P: table of glossed Row components
