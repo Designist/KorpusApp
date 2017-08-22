@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import SentenceTable from './SentenceTable';
 import { NativeRouter as Router, Route, Link } from 'react-router-native';
+import { getData, getIntroData } from './fake_database';
 
 var data2 = {
   "metadata": {
@@ -3268,11 +3269,18 @@ class TextDisplay extends React.Component {
   }
 }
 
-function dummyIndex() {
-  return <Link to={`/story1`}><Text>Go to story</Text></Link>;
+function DummyIndex() {
+  return <View>
+    <LinkToStory name="Intro" />
+    <LinkToStory name="000" />
+  </View>;
 }
 
-function indexLink() {
+function LinkToStory({ name }) {
+  return <Link to={`/story/${name}`}><Text>{`Go to story ${name}`}</Text></Link>;
+}
+
+function LinkToIndex() {
   return <Link to={`/`}><Text>Go to index</Text></Link>;
 }
 
@@ -3283,12 +3291,16 @@ function SayHi({ greeting }) {
 
 export default class App extends React.Component {
   render() {
+    const data = getData();
     return (
         <Router>
           <View>
-            <Route exact path="/" component={dummyIndex} />
-            <Route path="/story/1" component={indexLink} />
-            <Route path="/story/1" render={props => <TextDisplay data={data2} />} />
+            <Route render={props => <SayHi greeting="MARGIN"/>} />
+            <Route exact path="/" component={DummyIndex} />
+            <Route exact path="/" render={props => <StoryIndex data={data['index']} />} />
+            <Route path="/story" component={LinkToIndex} />
+            <Route path="/story/Intro" render={props => <TextDisplay data={getIntroData()} />} />
+            <Route path="/story/000" render={props => <TextDisplay data={data['stories'][0]} />} />
           </View>
         </Router>
     );
