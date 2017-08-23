@@ -6,15 +6,8 @@ import { getData, getIntroData } from './data/fake_database';
 import TextDisplay from './components/TextDisplay';
 
 
-function DummyIndex() {
-  return <View>
-    <LinkToStory name="Intro" />
-    <LinkToStory name="000" />
-  </View>;
-}
-
-function LinkToStory({ name }) {
-  return <View key={id.generate()}><Link to={`/story/${name}`}><Text>{`Go to story ${name}`}</Text></Link></View>;
+function LinkToStory({ linkName, displayName }) {
+  return <View key={id.generate()}><Link to={`/story/${linkName}`}><Text>{`Go to story ${displayName}`}</Text></Link></View>;
 }
 
 function LinkToIndex() {
@@ -28,28 +21,14 @@ function SayHi({ greeting }) {
 
 export function StoryIndex({ index }) {
   let storyList = [];
-  storyList.push(
-      // <View key={id.generate()}>
-        <Link to={`/story/Intro`}>Intro</Link>
-      // </View>
-  );
   for (const story in index) {
     if (index.hasOwnProperty(story)) {
-      // storyList.push(
-      //     <View key={id.generate()}>
-      //       <Text>hiiiii</Text>
-      //     </View>
-      // );
-
-      // storyList.push(
-      //   <View key={id.generate()}>
-      //     <Link to={`/story/${index[story]['title from filename']}`}>{story}</Link>
-      //   </View>
-      // )
+      storyList.push(
+          <LinkToStory key={id.generate()} linkName={index[story]['title from filename']} displayName={story} />
+      )
     }
   }
   return <ScrollView>{storyList}</ScrollView>;
-  // return <Text>{String(Object.keys(index))}</Text>; // seems correct ("Intro.eaf,103.xml,001.xml,...test.eaf")
 }
 
 export default class App extends React.Component {
