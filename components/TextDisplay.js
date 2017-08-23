@@ -5,16 +5,16 @@ import SentenceTable from './SentenceTable';
 import TimedSentence from './TimedSentence';
 
 export default function TextDisplay({ data }) {
-  var output = [];
-  var title = data["metadata"]["title"]["_default"];
-  var sentences = data["sentences"];
-  var tiers = data["metadata"]["tier IDs"];
+  const output = [];
+  const title = data["metadata"]["title"]["_default"];
+  const sentences = data["sentences"];
+  const tiers = data["metadata"]["tier IDs"];
+  const timed = data['metadata']['timed'];
 
   output.push(<Text key={id.generate()} style={styles.bigred}>{title}</Text>);
 
-  for (var i=0; i<sentences.length; i++) {
+  for (let i=0; i<sentences.length; i++) {
     // output.push(<Text key={id.generate()} style={styles.blue}>{sentences[i]["text"]}</Text>);
-    const timed = true; // TODO use real value
     if (timed) {
       output.push(<TimedSentence key={id.generate()} sentence={sentences[i]} tiers={tiers} />);
     } else {
