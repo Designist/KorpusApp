@@ -1,8 +1,9 @@
 import React from 'react';
 import id from 'shortid';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
 import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import SentenceTable from './SentenceTable';
+import Video from 'react-native-video';
 
 var data2 = {
   "metadata": {
@@ -3271,6 +3272,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View>
+        <Video source={require('./media_files/Intro.mp4')} style={{ height: 300}}/>
         <TextDisplay data={data2} />
       </View>
     );
