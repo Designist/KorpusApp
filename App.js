@@ -3,7 +3,7 @@ import id from 'shortid';
 import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
 import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import SentenceTable from './SentenceTable';
-import Video from 'react-native-video';
+import Video from 'react-native-video-controls';
 
 var data2 = {
   "metadata": {
