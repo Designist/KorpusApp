@@ -31,6 +31,23 @@ export function StoryIndex({ index }) {
   return <ScrollView>{storyList}</ScrollView>;
 }
 
+export function Stories({ stories }) {
+  return (
+    <View>
+      <LinkToIndex/>
+      {
+        stories.map(story => (
+            <Route
+                key={id.generate()}
+                exact path={`/story/${story['metadata']['title from filename']}`}
+                render={props => <TextDisplay data={story} />}
+            />
+        ))
+      }
+    </View>
+  );
+}
+
 export default class App extends React.Component {
   render() {
     const data = getData();
@@ -39,9 +56,7 @@ export default class App extends React.Component {
           <View>
             <Route render={props => <SayHi greeting="MARGIN"/>} />
             <Route exact path="/" render={props => <StoryIndex index={data['index']} />} />
-            <Route path="/story" component={LinkToIndex} />
-            <Route path="/story/Intro" render={props => <TextDisplay data={getIntroData()} />} />
-            <Route path="/story/000" render={props => <TextDisplay data={data['stories'][0]} />} />
+            <Route path="/story" render={props => <Stories stories={data['stories']} />} />
           </View>
         </Router>
     );

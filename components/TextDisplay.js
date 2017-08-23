@@ -14,7 +14,7 @@ export default function TextDisplay({ data }) {
 
   for (var i=0; i<sentences.length; i++) {
     // output.push(<Text key={id.generate()} style={styles.blue}>{sentences[i]["text"]}</Text>);
-    const timed = false; // TODO use real value
+    const timed = true; // TODO use real value
     if (timed) {
       output.push(<TimedSentence key={id.generate()} sentence={sentences[i]} tiers={tiers} />);
     } else {
