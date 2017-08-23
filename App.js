@@ -1,51 +1,13 @@
 import React from 'react';
-import id from 'shortid';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { NativeRouter as Router, Route, Link } from 'react-router-native';
-import { getData, getIntroData } from './data/fake_database';
-import TextDisplay from './components/TextDisplay';
-
-
-function LinkToStory({ linkName, displayName }) {
-  return <View key={id.generate()}><Link to={`/story/${linkName}`}><Text>{`Go to story ${displayName}`}</Text></Link></View>;
-}
-
-function LinkToIndex() {
-  return <Link to={`/`}><Text>Go to index</Text></Link>;
-}
+import { getData } from './data/fake_database';
+import StoryIndex from './components/StoryIndex';
+import Stories from './components/Stories';
 
 // a placeholder component used only for debugging
 function SayHi({ greeting }) {
   return <Text>{greeting}</Text>;
-}
-
-export function StoryIndex({ index }) {
-  let storyList = [];
-  for (const story in index) {
-    if (index.hasOwnProperty(story)) {
-      storyList.push(
-          <LinkToStory key={id.generate()} linkName={index[story]['title from filename']} displayName={story} />
-      )
-    }
-  }
-  return <ScrollView>{storyList}</ScrollView>;
-}
-
-export function Stories({ stories }) {
-  return (
-    <View>
-      <LinkToIndex/>
-      {
-        stories.map(story => (
-            <Route
-                key={id.generate()}
-                exact path={`/story/${story['metadata']['title from filename']}`}
-                render={props => <TextDisplay data={story} />}
-            />
-        ))
-      }
-    </View>
-  );
 }
 
 export default class App extends React.Component {
