@@ -3242,6 +3242,10 @@ export function TimedSentence({ sentence, tiers }) {
   );
 }
 
+function _onProgress(data) {
+  console.log(data["currentTime"]);
+}
+
 class TextDisplay extends React.Component {
   // I/P: data, a single story in JSON format
   // O/P: a div containing the plaintext of this story
@@ -3272,7 +3276,12 @@ export default class App extends React.Component {
   render() {
     return (
       <View>
-        <Video source={require('./media_files/Intro.mp4')} style={{ height: 300}}/>
+        <Video
+          source={require('./media_files/Intro.mp4')}
+          style={{ height: 300}}
+          progressUpdateInterval={10.0}
+          onProgress={_onProgress}
+        />
         <TextDisplay data={data2} />
       </View>
     );

@@ -267,7 +267,7 @@
 		</data>
 		<key>PlugIns/KorpusAppTests.xctest.dSYM/Contents/Resources/DWARF/KorpusAppTests</key>
 		<data>
-		w8GnSt96qLKdu/jXIJz5Tiv2+Po=
+		V9tj5q3fDA5bhbTMf8hOTAgzx3c=
 		</data>
 		<key>PlugIns/KorpusAppTests.xctest/Info.plist</key>
 		<data>
@@ -275,7 +275,7 @@
 		</data>
 		<key>PlugIns/KorpusAppTests.xctest/KorpusAppTests</key>
 		<data>
-		yS0MaBgYSB/g+g0KZlzFl30j57E=
+		BJNrF85nlaZtcpHCc33tn0wWZzA=
 		</data>
 		<key>PlugIns/KorpusAppTests.xctest/_CodeSignature/CodeResources</key>
 		<data>
@@ -980,11 +980,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			w8GnSt96qLKdu/jXIJz5Tiv2+Po=
+			V9tj5q3fDA5bhbTMf8hOTAgzx3c=
 			</data>
 			<key>hash2</key>
 			<data>
-			0pZCbCb6rgTF2A+kWxY/FKKr0JIQT9GICBzGsBkMcG4=
+			syQjmceU2rjUiBzCcj2QquZioRWwAs3Hrzpo/J5UPKk=
 			</data>
 		</dict>
 		<key>PlugIns/KorpusAppTests.xctest/Info.plist</key>
@@ -1002,11 +1002,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yS0MaBgYSB/g+g0KZlzFl30j57E=
+			BJNrF85nlaZtcpHCc33tn0wWZzA=
 			</data>
 			<key>hash2</key>
 			<data>
-			bigs14kKOquIHBSuQuhGFA+raJe+kWpoH9WmpdzZpXk=
+			C4cgEbBn9v8OEfIKQEQG5qodP3fndIcCX+PR6Hay9vk=
 			</data>
 		</dict>
 		<key>PlugIns/KorpusAppTests.xctest/_CodeSignature/CodeResources</key>
